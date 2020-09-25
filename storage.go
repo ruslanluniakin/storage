@@ -9,22 +9,23 @@ const layoutISO = "2006-01-02"
 
 // User struct
 type User struct {
-	id        int
-	firstName string
-	lastName  string
-	year      time.Time
+	Id        int
+	FirstName string
+	LastName  string
+	Year      time.Time
 }
 
-func newUser(id int, firstName, lastName, year string) User {
-	y, err := time.Parse(layoutISO, year)
+// NewUser ...
+func NewUser(Id int, FirstName, LastName, Year string) User {
+	y, err := time.Parse(layoutISO, Year)
 	if err != nil {
 		fmt.Println(err)
 	}
 	user := User{
-		id:        id,
-		firstName: firstName,
-		lastName:  lastName,
-		year:      y,
+		Id:        Id,
+		FirstName: FirstName,
+		LastName:  LastName,
+		Year:      y,
 	}
 	return user
 }
@@ -42,8 +43,8 @@ func NewMapUserStorage() *MapUserStorage {
 }
 
 // GetUser ...
-func (u *MapUserStorage) GetUser(id int) User {
-	findUser, exists := u.users[id]
+func (u *MapUserStorage) GetUser(Id int) User {
+	findUser, exists := u.users[Id]
 
 	if !exists {
 		return User{}
@@ -53,21 +54,21 @@ func (u *MapUserStorage) GetUser(id int) User {
 }
 
 // Add ...
-func (u *MapUserStorage) Add(firstName, lastName, year string) {
-	id := len(u.users)
+func (u *MapUserStorage) Add(FirstName, LastName, Year string) {
+	Id := len(u.users)
 
-	user := newUser(id, firstName, lastName, year)
+	user := newUser(Id, FirstName, LastName, Year)
 
-	u.users[user.id] = user
+	u.users[user.Id] = user
 }
 
 // FindFirstName ...
-func (u *MapUserStorage) FindFirstName(firstName string) map[int]User {
+func (u *MapUserStorage) FindFirstName(FirstName string) map[int]User {
 	var users = make(map[int]User)
 
 	for _, value := range u.users {
-		if value.firstName == firstName {
-			users[value.id] = value
+		if value.FirstName == FirstName {
+			users[value.Id] = value
 		}
 	}
 
