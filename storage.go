@@ -32,7 +32,7 @@ func NewUser(Id int, FirstName, LastName, Year string) User {
 
 // MapUserStorage ...
 type MapUserStorage struct {
-	users map[int]User
+	Users map[int]User
 }
 
 // NewMapUserStorage ...
